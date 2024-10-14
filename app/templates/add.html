@@ -1,23 +1,66 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-<title>Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}"> <!-- Admin-specific CSS -->
 </head>
 <body>
-<h2>Add items</h2>
-<form action="/addItem" method="POST" enctype="multipart/form-data">
-	Name: <input type="text" name="name"><br>
-	Price: <input type="text" name="price"><br>
-	Description: <textarea name="description" rows=3 cols="40"></textarea><br>
-	Image: <input type="file" name="image"><br>
-	Stock: <input type="text" name="stock"><br>
-	Category: <select name="category">
-		{% for row in categories %}
-			<option value="{{row[0]}}">{{row[1]}}</option>
-		{% endfor %}
-	</select><br>
-	<input type="submit">
-</form>
+
+<!-- Title Bar -->
+<div id="title">
+    <div id="logo-container">
+        <a href="/" style="text-decoration: none;">
+            Kitaab<span>Shop</span>
+        </a>
+    </div>
+</div>
+
+<!-- Add Item Form -->
+<div class="admin-container">
+    <h1>Add new book to inventory</h1>
+    <form action="/addItem" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="3" cols="40" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" required>
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock:</label>
+            <input type="text" id="stock" name="stock" required>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                {% for row in categories %}
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Add Item" class="btn-submit">
+        </div>
+    </form>
+</div>
+
 </body>
 </html>
-

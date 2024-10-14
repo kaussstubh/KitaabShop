@@ -1,0 +1,45 @@
+/* OTP Form Container */
+.otp-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center align all content */
+}
+
+/* Heading Styling for Success Page */
+.otp-success-heading {
+    text-align: center;
+    color: #2874f0; /* Flipkart blue */
+    margin-bottom: 20px;
+}
+
+/* Success Message Styling */
+.otp-success-message {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.btn-login {
+    background-color: #ff5722;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 20px;
+    width: auto; /* Set width based on content */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Hover effect for the button */
+.btn-login:hover {
+    background-color: #e64a19;
+}

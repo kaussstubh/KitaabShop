@@ -10,9 +10,11 @@
 
 <!-- Title Bar -->
 <div id="title">
-    <a href="/">
-        <img id="logo" src= "{{ url_for('static', filename='images/logo.png') }}">
-    </a>
+    <div id="logo-container">
+        <a href="/" style="text-decoration: none;">
+            Kitaab<span>Shop</span>
+        </a>
+    </div>
     <form>
         <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
         <button id="searchButton">Search</button>

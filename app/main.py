@@ -1,6 +1,9 @@
 from flask import *
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
+import random
+import smtplib  # To send email
+from flask import session
 
 app = Flask(__name__)
 app.secret_key = 'random string'
@@ -181,7 +184,7 @@ def updateProfile():
 def changePassword():
     if 'email' not in session:
         return redirect(url_for('loginForm'))
-
+    loggedIn, firstName, noOfItems = getLoginDetails()
     if request.method == "POST":
         oldPassword = request.form['oldpassword']
         oldPasswordHashed = hashlib.md5(oldPassword.encode()).hexdigest()
@@ -211,28 +214,68 @@ def changePassword():
                 msg = "Incorrect old password."
         conn.close()
 
-        return render_template("changePassword.html", msg=msg)
+        return render_template("changePassword.html", msg=msg,loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
     else:
-        return render_template("changePassword.html")
+        return render_template("changePassword.html",loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
 
 @app.route("/loginForm")
 def loginForm():
+    # Check if user is already logged in
     if 'email' in session:
         return redirect(url_for('root'))
     else:
         return render_template('login.html', error='')
 
-@app.route("/login", methods = ['POST', 'GET'])
+
+@app.route('/login', methods=['POST'])
 def login():
+    # Mock login credentials check (replace with DB checks as needed)
+    email = request.form['email']
+    password = request.form['password']
+
+    # Example credentials to match with
+    if email == "testuser@example.com" and password == "Test@1234":
+        # Generate a mock OTP (for demonstration purposes)
+        otp = '123456'
+        session['otp'] = otp  # Store OTP in session temporarily
+        session['temp_email'] = email  # Store email temporarily (not logged in yet)
+
+        # Redirect to OTP verification page
+        return redirect(url_for('otp_screen'))
+    else:
+        # Invalid credentials case
+        return render_template('login.html', error="Invalid email or password.")
+
+
+@app.route('/otp', methods=['GET', 'POST'])
+def otp_screen():
+    # Check if the temp_email exists in session (this means user has entered credentials but hasn't verified OTP)
+    if 'temp_email' not in session:
+        return redirect(url_for('loginForm'))  # If not logged in, redirect to login
+    
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        if is_valid(email, password):
-            session['email'] = email
-            return redirect(url_for('root'))
+        entered_otp = request.form['otp']
+
+        # Check if entered OTP matches the session OTP
+        if entered_otp == session.get('otp'):
+            # OTP is correct, login the user now by storing email in session
+            session['email'] = session['temp_email']
+            session.pop('otp', None)  # Remove OTP from session
+            session.pop('temp_email', None)  # Remove temporary email
+
+            return render_template('otp_success.html', email=session['email'])
         else:
-            error = 'Invalid UserId / Password'
-            return render_template('login.html', error=error)
+            # Invalid OTP, reload the OTP page with an error
+            return render_template('otp.html', error="Invalid OTP, try again.")
+    
+    return render_template('otp.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('email', None)  # Clear the session (logout)
+    session.pop('otp', None)
+    session.pop('temp_email', None)  # Clear temp email if any
+    return redirect(url_for('loginForm'))
 
 @app.route("/productDescription")
 def productDescription():
@@ -309,10 +352,6 @@ def removeFromCart():
     conn.close()
     return redirect(url_for('root'))
 
-@app.route("/logout")
-def logout():
-    session.pop('email', None)
-    return redirect(url_for('root'))
 
 def is_valid(email, password):
     con = sqlite3.connect(DATABASE_PATH)
@@ -553,6 +592,7 @@ def viewProfile():
     
     else:
         return "User not found", 404  # If the user data is not found
+
 
 if __name__ == '__main__':
     app.run(debug=True)

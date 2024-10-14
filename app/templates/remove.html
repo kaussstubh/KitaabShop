@@ -1,27 +1,51 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-<title>Remove</title>
-<link rel="stylesheet" href={{url_for('static', filename='css/remove.css')}}>
-</link>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Items - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}"> <!-- Admin-specific CSS -->
 </head>
 <body>
-<table>
-	{% for i in range(6) %}
-	<tr>
-		{% for row in data %}
-		<td>
-			<a href="/removeItem?productId={{row[0]}}">
-			{% if i == 4 %}
-				<img src={{ url_for('static', filename='uploads/' + row[i]) }} id="itemImage" />
-			{% else %}
-				{{row[i]}}
-			{% endif %}
-			</a>
-		</td>
-		{% endfor %}
-	</tr>
-	{% endfor %}
-</table>
+
+<!-- Title Bar -->
+<div id="title">
+    <div id="logo-container">
+        <a href="/" style="text-decoration: none;">
+            Kitaab<span>Shop</span>
+        </a>
+    </div>
+</div>
+
+<!-- Remove Item Table -->
+<div class="admin-container">
+    <h1>Remove books from inventory</h1>
+    <table class="item-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>₹{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td><img src="{{ url_for('static', filename='uploads/' + row[4]) }}" id="itemImage" /></td>
+                <td>{{ row[5] }}</td>
+                <td><a href="/removeItem?productId={{ row[0] }}" class="btn-remove">Remove</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
