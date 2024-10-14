@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Product Description - KitaabShop</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
@@ -27,8 +28,12 @@
         <a class="sign-in-btn" href="/loginForm">Sign In</a>
     </div>
     {% else %}
-    <div class="dropdown">
-        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+    <div class="dropdown user-dropdown">
+        <div class="user-profile">
+            <i class="fa fa-user user-icon"></i>  <!-- User icon -->
+            <span>Hello, {{firstName}}</span>       <!-- Greeting -->
+            <i class="fa fa-caret-down"></i>       <!-- Dropdown icon -->
+        </div>
         <div class="dropdown-content">
             <a href="/account/orders">Your orders</a>
             <a href="/account/profile">Your profile</a>

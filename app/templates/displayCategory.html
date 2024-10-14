@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>{{categoryName}} - KitaabShop</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
@@ -11,11 +12,11 @@
 <body>
 
 <div id="title">
-    <div id="logo-container">
-        <a href="/" style="text-decoration: none;">
-            Kitaab<span>Shop</span>
-        </a>
-    </div>
+	<div id="logo-container">
+		<a href="/" style="text-decoration: none;">
+			Kitaab<span>Shop</span>
+		</a>
+	</div>
 	<form>
 		<input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
 		<input id="searchButton" type="submit" value="Search">
@@ -26,8 +27,12 @@
 		<a class="sign-in-btn" href="/loginForm">Sign In</a>
 	</div>
 	{% else %}
-	<div class="dropdown">
-		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+	<div class="dropdown user-dropdown">
+		<div class="user-profile">
+			<i class="fa fa-user user-icon"></i>  <!-- User icon -->
+			<span>Hello, {{firstName}}</span>       <!-- Greeting -->
+			<i class="fa fa-caret-down"></i>       <!-- Dropdown icon -->
+		</div>
 		<div class="dropdown-content">
 			<a href="/account/orders">Your orders</a>
 			<a href="/account/profile">Your profile</a>
@@ -44,7 +49,6 @@
 	</div>
 </div>
 
-<!-- Category Header -->
 <!-- Category Header -->
 <div class="category-header">
     <h1>Books in {{categoryName}} Genre</h1>

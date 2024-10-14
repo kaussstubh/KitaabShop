@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Your Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href={{url_for('static', filename='css/cart.css')}} />
     <link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css') }} />
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}" />
@@ -23,8 +24,12 @@
         <a class="sign-in-btn" href="/loginForm">Sign In</a>
     </div>
     {% else %}
-    <div class="dropdown">
-        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+    <div class="dropdown user-dropdown">
+        <div class="user-profile">
+            <i class="fa fa-user user-icon"></i>  <!-- User icon -->
+            <span>Hello, {{firstName}}</span>       <!-- Greeting -->
+            <i class="fa fa-caret-down"></i>       <!-- Dropdown icon -->
+        </div>
         <div class="dropdown-content">
             <a href="/account/orders">Your orders</a>
             <a href="/account/profile">Your profile</a>
@@ -40,7 +45,7 @@
         </a>
     </div>
 </div>
-
+    
 <div id="cartItems">
     <h2>Shopping Cart</h2>
     <div id="tableItems">

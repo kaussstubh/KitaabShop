@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Success - KitaabShop</title>
+    <title>Password Reset - KitaabShop</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/otp.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forgot_password.css') }}"> <!-- Reusing the forgot password CSS -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
 </head>
 <body>
 
@@ -32,11 +32,12 @@
     </div>
 </div>
 
-<!-- Success Message Section -->
-<div class="otp-container">
-    <h1 class="otp-success-heading">Success!</h1>
-    <p class="otp-success-message">Your login is successful. Welcome, {{ email }}.</p>
-    <a href="/" class="btn-login">Go to Homepage</a>
+<!-- Password Reset Success Section -->
+<div class="forgot-password-container">
+    <h1>Password Reset Link Sent!</h1>
+    <p>If an account exists for the email you provided, you will receive a password reset link.</p>
+    <p>Please check your email and follow the instructions to reset your password.</p>
+    <a href="/" class="btn-reset">Go to Homepage</a>
 </div>
 
 </body>

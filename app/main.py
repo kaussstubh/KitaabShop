@@ -277,6 +277,25 @@ def logout():
     session.pop('temp_email', None)  # Clear temp email if any
     return redirect(url_for('loginForm'))
 
+@app.route('/forgot-password')
+def forgot_password():
+    return render_template('forgot_password.html')
+
+@app.route('/send-reset-link', methods=['POST'])
+def send_reset_link():
+    email = request.form.get('email')
+    
+    # In a real application, you would verify the email and send an actual reset link here.
+    # For now, we will simulate the process.
+    if email:
+        # Simulate sending a password reset link (mock)
+        # You could show the message that "a password reset link has been sent"
+        return render_template('send_reset_link.html', email=email)
+    else:
+        # If email is empty, you can reload the form with an error message
+        return render_template('forgot_password.html', error="Please enter a valid email.")
+
+
 @app.route("/productDescription")
 def productDescription():
     loggedIn, firstName, noOfItems = getLoginDetails()
