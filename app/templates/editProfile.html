@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editProfile.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div id="title">
+    <a href="/">
+        <img id="logo" src= "{{ url_for('static', filename='images/logo.png') }}">
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+        <button id="searchButton">Search</button>
+    </form>
+
+    {% if not loggedIn %}
+    <div id="signInButton">
+        <a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    {% else %}
+    <div class="dropdown">
+        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+        <div class="dropdown-content">
+            <a href="/account/orders">Your orders</a>
+            <a href="/account/profile">Your profile</a>
+            <hr>
+            <a href="/logout">Sign Out</a>
+        </div>
+    </div>
+    {% endif %}
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src="{{ url_for('static', filename='images/shoppingCart.png') }}" id="cartIcon">
+            <span class="cart-text">CART {{noOfItems}}</span>
+        </a>
+    </div>
+</div>
+
+<!-- Edit Profile Section -->
+<div class="edit-profile-container">
+    <h2>Edit Profile</h2>
+    <form action="/updateProfile" method="POST" class="edit-profile-form">
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value="{{profileData[1]}}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" name="firstName" value="{{profileData[2]}}">
+        </div>
+
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input type="text" name="lastName" value="{{profileData[3]}}">
+        </div>
+
+        <div class="form-group">
+            <label>Address 1:</label>
+            <input type="text" name="address1" value="{{profileData[4]}}">
+        </div>
+
+        <div class="form-group">
+            <label>Address 2:</label>
+            <input type="text" name="address2" value="{{profileData[5]}}">
+        </div>
+
+        <div class="form-group">
+            <label>Zip Code:</label>
+            <input type="text" name="zipcode" value="{{profileData[6]}}">
+        </div>
+
+        <div class="form-group">
+            <label>City:</label>
+            <input type="text" name="city" value="{{profileData[7]}}">
+        </div>
+
+        <div class="form-group">
+            <label>State:</label>
+            <input type="text" name="state" value="{{profileData[8]}}">
+        </div>
+
+        <div class="form-group">
+            <label>Country:</label>
+            <input type="text" name="country" value="{{profileData[9]}}">
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="text" name="phone" value="{{profileData[10]}}">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Save</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

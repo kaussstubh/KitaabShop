@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - KitaabShop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"> <!-- Link to new login-specific CSS -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div id="title">
+    <a href="/">
+        <img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+    <div id="signInButton">
+		<a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+            CART {{noOfItems}}
+        </a>
+    </div>
+</div>
+
+<!-- Login Form Section -->
+<div class="login-container">
+    <h1>Login to KitaabShop</h1>
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="testuser@example.com" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="Test@1234" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn-login">
+        </div>
+        <p class="register-link">
+            Don't have an account? <a href="/registerationForm">Register here</a>
+        </p>
+    </form>
+</div>
+
+</body>
+</html>

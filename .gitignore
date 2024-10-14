@@ -1,0 +1,7 @@
+# Ignore virtual environment files
+venv/
+
+# Ignore specific Python files
+schema_check.py
+insert_data.py
+prompt.py

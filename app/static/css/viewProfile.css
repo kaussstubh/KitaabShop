@@ -1,0 +1,60 @@
+/* Profile container */
+.profile-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile heading */
+.profile-container h2 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Profile details table */
+.profile-details {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.profile-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profile-details th, 
+.profile-details td {
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Table headers */
+.profile-details th {
+    background-color: #2874f0; /* Flipkart blue */
+    color: white;
+    font-weight: bold;
+}
+
+/* Table data cells */
+.profile-details td {
+    color: #333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 15px;
+    }
+
+    .profile-details th, 
+    .profile-details td {
+        padding: 10px;
+    }
+}

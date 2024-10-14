@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>View Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewProfile.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div id="title">
+    <a href="/">
+        <img id="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+    {% if not loggedIn %}
+    <div id="signInButton">
+        <a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    {% else %}
+    <div class="dropdown">
+        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+        <div class="dropdown-content">
+            <a href="/account/orders">Your orders</a>
+            <a href="/account/profile">Your profile</a>
+            <hr>
+            <a href="/logout">Sign Out</a>
+        </div>
+    </div>
+    {% endif %}
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src="{{ url_for('static', filename='images/shoppingCart.png') }}" id="cartIcon">
+            <span class="cart-text">CART {{noOfItems}}</span>
+        </a>
+    </div>
+</div>
+
+<!-- Profile Details Section -->
+<div class="profile-container">
+    <h2>Your Profile</h2>
+    <div class="profile-details">
+        <table>
+            <tr>
+                <th>First Name</th>
+                <td>{{ userData.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ userData.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ userData.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ userData.phone }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ userData.address1 }}, {{ userData.address2 }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ userData.city }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ userData.state }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ userData.country }}</td>
+            </tr>
+            <tr>
+                <th>Zip Code</th>
+                <td>{{ userData.zipcode }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

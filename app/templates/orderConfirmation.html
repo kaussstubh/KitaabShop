@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - KitaabShop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/orderConfirmation.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div id="title">
+    <a href="/">
+        <img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+    {% if not loggedIn %}
+    <div id="signInButton">
+        <a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    {% else %}
+    <div class="dropdown">
+        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+        <div class="dropdown-content">
+            <a href="/account/orders">Your orders</a>
+            <a href="/account/profile">Your profile</a>
+            <hr>
+            <a href="/logout">Sign Out</a>
+        </div>
+    </div>
+    {% endif %}
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+            CART {{noOfItems}}
+        </a>
+    </div>
+</div>
+
+<!-- Confirmation Message -->
+<div class="confirmation-container">
+    <div class="confirmation-header">
+        <img src="{{ url_for('static', filename='images/success.png') }}" alt="Order Successful" class="confirmation-icon">
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for shopping with KitaabShop, {{firstName}}. Your order has been placed and will be delivered soon.</p>
+    </div>
+
+    <div class="order-details">
+        <h2>Order Summary</h2>
+        <table>
+            <tr>
+                <td>Order Number:</td>
+                <td>{{orderId}}</td>
+            </tr>
+            <tr>
+                <td>Estimated Delivery Date:</td>
+                <td>{{deliveryDate}}</td>
+            </tr>
+            <tr>
+                <td>Total Amount:</td>
+                <td>₹{{totalPrice}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="confirmation-actions">
+        <a href="/account/orders" class="btn-track-order">Track Your Order</a>
+        <a href="/" class="btn-continue-shopping">Continue Shopping</a>
+    </div>
+</div>
+
+</body>
+</html>

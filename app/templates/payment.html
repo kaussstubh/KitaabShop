@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Payment</title>
+    <link rel="stylesheet" href={{url_for('static', filename='css/payment.css')}} />
+    <link rel="stylesheet" href={{url_for('static', filename='css/topStyle.css')}} />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+<div id="title">
+    <a href="/">
+        <img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+    {% if not loggedIn %}
+    <div id="signInButton">
+        <a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    {% else %}
+    <div class="dropdown">
+        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+        <div class="dropdown-content">
+            <a href="/account/orders">Your orders</a>
+            <a href="/account/profile">Your profile</a>
+            <hr>
+            <a href="/logout">Sign Out</a>
+        </div>
+    </div>
+    {% endif %}
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+            CART {{noOfItems}}
+        </a>
+    </div>
+</div>
+
+<div id="payment">
+    <h2>Payment Details</h2>
+    <form action="/processPayment" method="POST">
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" name="cardNumber" required>
+        <br>
+
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+        <br>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required>
+        <br>
+
+        <label for="nameOnCard">Name on Card:</label>
+        <input type="text" id="nameOnCard" name="nameOnCard" required>
+        <br>
+
+        <input type="submit" value="Pay Now">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* Container for profile actions */
+.profile-container {
+    max-width: 800px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.profile-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Profile action buttons */
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-button {
+    display: inline-block;
+    padding: 15px 25px;
+    background-color: #ff5722; /* Flipkart's orange for buttons */
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.profile-button:hover {
+    background-color: #e64a19; /* Darker orange on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 20px;
+    }
+
+    .profile-actions {
+        gap: 15px;
+    }
+
+    .profile-button {
+        width: 100%;

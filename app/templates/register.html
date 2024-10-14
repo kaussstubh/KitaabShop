@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - KitaabShop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}"> <!-- Link to new register-specific CSS -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/validateForm.js') }}"></script>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div id="title">
+    <a href="/">
+        <img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+    {% if not loggedIn %}
+    <div id="signInButton">
+        <a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    {% else %}
+    <div class="dropdown">
+        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+        <div class="dropdown-content">
+            <a href="/account/orders">Your orders</a>
+            <a href="/account/profile">Your profile</a>
+            <hr>
+            <a href="/logout">Sign Out</a>
+        </div>
+    </div>
+    {% endif %}
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+            CART {{noOfItems}}
+        </a>
+    </div>
+</div>
+
+<!-- Registration Form Section -->
+<div class="register-container">
+    <h1>Create Your KitaabShop Account</h1>
+    <form action="/register" method="POST" onsubmit="return validate()">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="testuser" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="testuser@example.com" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="Test@1234" required>
+        </div>
+        <div class="form-group">
+            <label for="cpassword">Confirm Password:</label>
+            <input type="password" id="cpassword" name="cpassword" value="Test@1234" required>
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" value="Test" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" value="User" required>
+        </div>
+        <div class="form-group">
+            <label for="address1">Address Line 1:</label>
+            <input type="text" id="address1" name="address1" value="123 Test St" required>
+        </div>
+        <div class="form-group">
+            <label for="address2">Address Line 2:</label>
+            <input type="text" id="address2" name="address2" value="Apt 1">
+        </div>
+        <div class="form-group">
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" id="zipcode" name="zipcode" value="123456" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="Test City" required>
+        </div>
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" value="Test State" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" value="Test Country" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" value="1234567890" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn-register">
+        </div>
+        <p class="login-link">
+            Already have an account? <a href="/loginForm">Login here</a>
+        </p>
+    </form>
+</div>
+
+</body>
+</html>

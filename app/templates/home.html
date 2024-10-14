@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KitaabShop - Home</title>
+    <!-- Include topStyle for the title bar -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <!-- Include home.css for content-specific styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div id="title">
+    <a href="/">
+        <img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+    </a>
+    <form>
+        <input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+        <input id="searchButton" type="submit" value="Search">
+    </form>
+
+    {% if not loggedIn %}
+    <div id="signInButton">
+        <a class="sign-in-btn" href="/loginForm">Sign In</a>
+    </div>
+    {% else %}
+    <div class="dropdown">
+        <button class="dropbtn">Hello, <br>{{firstName}}</button>
+        <div class="dropdown-content">
+            <a href="/account/orders">Your orders</a>
+            <a href="/account/profile">Your profile</a>
+            <hr>
+            <a href="/logout">Sign Out</a>
+        </div>
+    </div>
+    {% endif %}
+    <div id="kart">
+        <a class="link" href="/cart">
+            <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+            CART {{noOfItems}}
+        </a>
+    </div>
+</div>
+
+<!-- Sorting Dropdown -->
+<div class="sort-books">
+    <label for="sortBy">Sort by: </label>
+    <select id="sortBy" name="sortBy" onchange="sortBooks()">
+        <option value="nameAsc" {% if sort == 'nameAsc' %}selected{% endif %}>Name (A to Z)</option>
+        <option value="nameDesc" {% if sort == 'nameDesc' %}selected{% endif %}>Name (Z to A)</option>
+        <option value="priceLowHigh" {% if sort == 'priceLowHigh' %}selected{% endif %}>Price (Low to High)</option>
+        <option value="priceHighLow" {% if sort == 'priceHighLow' %}selected{% endif %}>Price (High to Low)</option>
+    </select>
+</div>
+
+<!-- Script for sorting -->
+<script>
+    function sortBooks() {
+        var selectedSort = document.getElementById('sortBy').value;
+        window.location.href = "/?sort=" + selectedSort;
+    }
+</script>
+
+<!-- Content Section -->
+<div class="display">
+    <div class="displayCategory">
+        <h2>Shop by Genre:</h2>
+        <select id="genreDropdown" name="genreDropdown" onchange="filterByGenre()">
+            <option value="">Select a Genre</option>
+            {% for row in categoryData %}
+            <option value="{{row[0]}}">{{row[1]}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <script>
+        function filterByGenre() {
+            var selectedGenre = document.getElementById('genreDropdown').value;
+            if (selectedGenre) {
+                window.location.href = "/displayCategory?categoryId=" + selectedGenre;
+            }
+        }
+    </script>
+
+    <div class="books-section">
+        <h2>Books</h2>
+        <div class="books-grid">
+            {% for row in itemData %}
+                <div class="book-item">
+                    <img src="{{ url_for('static', filename='uploads/' + (row[5] if row[5] else 'default.jpg')) }}" class="book-image"> <!-- Book Image -->
+                    <strong class="book-title">{{ row[1] }}</strong> <!-- Book Title -->
+                    <p class="book-price">₹{{ row[3] }}</p> <!-- Book Price -->
+                    <a href="/productDescription?bookId={{ row[0] }}" class="view-details">View Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

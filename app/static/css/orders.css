@@ -1,0 +1,92 @@
+/* Orders Container */
+.orders-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 32px;
+    color: #2874f0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Order List */
+#ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual Order Item */
+.order-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.order-header h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 0;
+}
+
+.order-header p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+/* Order Details Section */
+.order-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.order-details p {
+    font-size: 16px;
+    color: #666;
+}
+
+.order-status {
+    color: #ff5722;  /* Similar to Flipkart’s red for emphasis */
+    font-weight: bold;
+}
+
+hr.order-separator {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .order-header,
+    .order-details {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-header h3, .order-header p {
+        margin-bottom: 10px;
+    }
+
+    .order-details p {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{categoryName}} - KitaabShop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topStyle.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/book.png') }}">
+</head>
+<body>
+
+<div id="title">
+	<a href="/">
+		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+	</a>
+	<form>
+		<input id="searchBox" type="text" name="searchQuery" placeholder="Search for books">
+		<input id="searchButton" type="submit" value="Search">
+	</form>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="sign-in-btn" href="/loginForm">Sign In</a>
+	</div>
+	{% else %}
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART {{noOfItems}}
+		</a>
+	</div>
+</div>
+
+<!-- Category Header -->
+<!-- Category Header -->
+<div class="category-header">
+    <h1>Books in {{categoryName}} Genre</h1>
+</div>
+
+<!-- Display books in a grid -->
+<div class="books-grid">
+    {% for row in data %}
+        <div class="book-item">
+            <img src="{{ url_for('static', filename='uploads/' + (row[3] if row[3] else 'default.jpg')) }}" alt="{{row[1]}}" class="book-image">
+            <h2 class="book-title">{{ row[1] }}</h2>
+            <p class="book-price">₹{{ row[2] }}</p>
+            <a href="/productDescription?bookId={{ row[0] }}" class="view-details">View Details</a>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

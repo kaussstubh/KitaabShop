@@ -1,0 +1,92 @@
+/* Category Header */
+.category-header {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.category-header h1 {
+    font-size: 32px;
+    color: #2874f0;
+    margin-bottom: 10px;
+}
+
+/* Grid layout for displaying books */
+.books-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual book item styling */
+.book-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: calc(25% - 20px);  /* 4 items per row with gap */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.book-item:hover {
+    transform: scale(1.05);
+}
+
+/* Book image styling */
+.book-image {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Book title styling */
+.book-title {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Book price styling */
+.book-price {
+    font-size: 16px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* View Details button styling */
+.view-details {
+    background-color: #ff5722;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.view-details:hover {
+    background-color: #e64a19;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .books-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .book-item {
+        width: 100%;
+    }
+
+    .category-header h1 {
+        font-size: 24px;
+    }
+}
