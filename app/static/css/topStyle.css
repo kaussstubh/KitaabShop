@@ -9,7 +9,7 @@
 
 /* Title bar styling */
 #title {
-    background-color: #2874f0; /* Flipkart blue */
+    background-color: #2874f0; 
     display: flex;
     justify-content: space-between;
     align-items: center;

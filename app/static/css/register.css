@@ -13,7 +13,7 @@
 /* Registration form title */
 .register-container h1 {
     font-size: 24px;
-    color: #2874f0;  /* Flipkart blue */
+    color: #2874f0;  
     margin-bottom: 20px;
 }
 
@@ -40,7 +40,7 @@
 
 /* Register button */
 .btn-register {
-    background-color: #2874f0;  /* Flipkart blue */
+    background-color: #2874f0;  
     color: white;
     padding: 10px 20px;
     border: none;
