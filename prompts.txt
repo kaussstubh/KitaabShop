@@ -1,0 +1,64 @@
+1. Starting with the project overview and setup
+Prompt:
+"I’m creating an e-commerce website using Flask. I want to set up the initial project structure, define routes for basic functionalities like product display, user authentication, and cart management. Could you help me design the folder structure and provide a simple template for the Flask app with clear route definitions?"
+
+2. Setting up the database
+Prompt:
+"I want to use SQLite as the database for this project. I need to create tables for users, products, orders, and categories. Can you provide the SQL schema and guide me on how to integrate the SQLite database into the Flask app?"
+
+3. Designing the home page with Flipkart-like UI
+Prompt:
+"I want the home page to have a Flipkart-style UI with a top navigation bar, a search bar, and a cart icon. The product listings should be displayed in a grid format with product images, prices, and an 'Add to Cart' button. Help me design the HTML and CSS for the homepage."
+
+4. Implementing user registration and login with session management
+Prompt:
+"Let’s implement user authentication. I need a registration page where users can create an account and a login page that handles sessions. Can you guide me on how to manage sessions using Flask and how to hash passwords for secure login?"
+
+5. Adding OTP verification after login
+Prompt:
+"After the user logs in, I want to introduce a mock OTP verification step for additional security. Could you help me implement a simple OTP verification screen? The OTP should be mocked for now, and if the user enters the correct OTP, they should be redirected to their account dashboard."
+
+6. Creating admin functionalities for adding and removing products
+Prompt:
+"I need admin-level functionality where admins can add and remove products from the website. Can you help me create separate routes for admins to manage product listings? I’d also like a simple HTML form to upload product details such as name, price, stock, and an image."
+
+7. Handling the cart system and checkout flow
+Prompt:
+"Now I want to add cart functionality where users can add products to their cart, update quantities, and proceed to checkout. Can you guide me through the backend logic for managing the cart using Flask and session data? The front-end should display the cart contents with options to update or remove items."
+
+8. Implementing a profile page with user orders and edit profile functionality
+Prompt:
+"Let’s create a user profile page where users can view their order history and edit their profile details like name, email, and address. I also want the page to have proper navigation options, including a dropdown for account settings. Can you guide me on how to display dynamic user data?"
+
+9. Fixing styling issues and ensuring responsive design
+Prompt:
+"I noticed some styling issues, especially with the title bar and dropdown menus. Can you help me fix the CSS so that the title bar remains consistent across all pages and dropdowns work smoothly? Also, I want the website to be fully responsive for both desktop and mobile."
+
+10. Adding password reset functionality with a mock email system
+Prompt:
+"I’d like to implement a 'Forgot Password' feature. When a user clicks 'Forgot Password', they should be prompted to enter their email, and a mock email with a password reset link should be sent. Can you show me how to design the flow and create mock email functionality?"
+
+11. Validating user inputs and handling errors gracefully
+Prompt:
+"I want to ensure proper validation for user inputs on forms, such as login, registration, and adding products. Help me implement both frontend and backend validation and display error messages elegantly on the page without disrupting the user flow."
+
+12. Enhancing the UI with icons and animations
+Prompt:
+"Can you suggest some ways to enhance the UI of the website? I’d like to add some icons for profile, cart, and navigation buttons. Additionally, a few subtle animations like hover effects on buttons and cards would improve the user experience. Could you guide me on how to implement this?"
+
+13. Managing orders and displaying them in the profile page
+Prompt:
+"Let’s implement order management. I need to create an 'Orders' page where users can view their previous purchases with details like order date, items purchased, and total price. Can you help me structure the database queries and design the HTML page?"
+
+14. Handling admin-level user access and restrictions
+Prompt:
+"I want to restrict admin functionalities like adding/removing products to only logged-in admins. Can you guide me on how to implement role-based access control (RBAC) in Flask and hide certain UI elements based on the user’s role?"
+
+15. Fixing dropdown and interactive elements in the title bar
+Prompt:
+"There seems to be a problem with the dropdown in the user profile section. When the user clicks the profile icon, the dropdown doesn’t stay open. Can you help me troubleshoot this issue and make sure the dropdown works smoothly on hover and click?"
+
+16. Testing and deploying the application
+Prompt:
+"Now that the website is ready, I want to test all features thoroughly and ensure there are no security loopholes, especially in user authentication and session handling. After testing, I’d like to deploy the Flask app to a cloud platform like GCP or AWS. Can you guide me on best practices for testing and deployment?"
+

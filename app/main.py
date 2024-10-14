@@ -555,13 +555,33 @@ def processPayment():
             cur.execute("SELECT userId FROM users WHERE email = ?", (email,))
             userId = cur.fetchone()[0]
 
-            # Place order and clear cart
+            # Get the books in the cart
+            cur.execute("SELECT books.bookId, books.price FROM books, kart WHERE books.bookId = kart.bookId AND kart.userId = ?", (userId,))
+            cartItems = cur.fetchall()
+
+            if not cartItems:
+                return redirect(url_for('cart', msg="Your cart is empty."))
+
+            # Calculate total price
+            totalPrice = sum([item[1] for item in cartItems])
+
             try:
-                # Assuming you've already inserted the order in the `orders` table
+                # Insert new order in the orders table
+                cur.execute("INSERT INTO orders (userId, total, date) VALUES (?, ?, datetime('now'))", (userId, totalPrice))
+                orderId = cur.lastrowid  # Capture the newly created orderId
+
+                # Insert items into the order_items table
+                for item in cartItems:
+                    cur.execute("INSERT INTO order_items (orderId, bookId, quantity) VALUES (?, ?, ?)", (orderId, item[0], 1))  # Assuming quantity = 1
+
+                # Clear the cart
                 cur.execute("DELETE FROM kart WHERE userId = ?", (userId,))
                 conn.commit()
-                return redirect(url_for('orderConfirmation'))  # Redirect to order confirmation page
-            except:
+
+                # Redirect to the order confirmation page with the new orderId
+                return redirect(url_for('orderConfirmation', orderId=orderId))
+
+            except Exception as e:
                 conn.rollback()
                 return render_template("payment.html", error="An error occurred while processing your order.")
         conn.close()
@@ -569,14 +589,43 @@ def processPayment():
         # Mock failure
         return render_template("payment.html", error="Invalid card details. Please try again.")
 
-@app.route("/orderConfirmation")
-def orderConfirmation():
+
+@app.route("/orderConfirmation/<int:orderId>")
+def orderConfirmation(orderId):
     if 'email' not in session:
         return redirect(url_for('loginForm'))
-
+    
     loggedIn, firstName, noOfItems = getLoginDetails()
+    email = session['email']
 
-    return render_template("orderConfirmation.html", loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
+    with sqlite3.connect(DATABASE_PATH) as conn:
+        cur = conn.cursor()
+        
+        # Get userId from session email
+        cur.execute("SELECT userId FROM users WHERE email = ?", (email,))
+        userId = cur.fetchone()[0]
+        
+        # Fetch order details for the provided orderId
+        cur.execute("SELECT total, date FROM orders WHERE orderId = ? AND userId = ?", (orderId, userId))
+        orderData = cur.fetchone()
+
+        if orderData:
+            totalPrice, orderDate = orderData
+            deliveryDate = "Estimated 3-5 business days"  # You can calculate this or leave it static
+        else:
+            return redirect(url_for('orders', msg="Order not found."))
+    
+    return render_template(
+        "orderConfirmation.html",
+        loggedIn=loggedIn,
+        firstName=firstName,
+        noOfItems=noOfItems,
+        orderId=orderId,
+        totalPrice=totalPrice,
+        deliveryDate=deliveryDate,
+        orderDate=orderDate
+    )
+
 
 @app.route("/account/profile/view")
 def viewProfile():
